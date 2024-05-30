@@ -32,4 +32,5 @@ Este script Python acessa o site da sympla, coleta os dados dos eventos de entre
 - pip install -r requirements.txt
 
 4. **Utilização:**
+```bash```
 - python schedule.py
