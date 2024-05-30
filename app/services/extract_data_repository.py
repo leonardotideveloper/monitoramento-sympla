@@ -43,16 +43,16 @@ class ExtractDataRepository:
                 detail = re.sub(r"&nbsp;", " ", detail)
                 detail = re.sub(r"\s+", " ", detail).strip()
 
-                adress = data["props"]["pageProps"]["hydrationData"]["eventHydration"][
+                address = data["props"]["pageProps"]["hydrationData"]["eventHydration"][
                     "event"
                 ]["eventsAddress"]
 
-                adress_completed = (
-                    adress["address"]
+                address_completed = (
+                    address["address"]
                     + ","
-                    + adress["addressNum"]
+                    + address["addressNum"]
                     + " - "
-                    + adress["neighborhood"]
+                    + address["neighborhood"]
                 )
                 date_event = data["props"]["pageProps"]["hydrationData"][
                     "eventHydration"
@@ -64,7 +64,7 @@ class ExtractDataRepository:
                 data = {
                     "Nome do evento": name,
                     "Data do evento": date_event,
-                    "Endereco do evento": adress_completed,
+                    "Endereco do evento": address_completed,
                     "Descricao do evento": detail,
                     "Sobre o produtor": about,
                 }
