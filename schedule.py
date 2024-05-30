@@ -18,10 +18,9 @@ def job():
     extract_data_controller.handle()
 
 
-schedule.every().day.at("00:00").do(job)
-
 if __name__ == "__main__":
     job()
+    schedule.every().day.at("00:00").do(job)
 
     while True:
         schedule.run_pending()
