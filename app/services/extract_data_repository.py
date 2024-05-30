@@ -11,7 +11,8 @@ import requests
 class ExtractDataRepository:
     def __init__(self, url) -> None:
         options = webdriver.ChromeOptions()
-
+        options.add_argument("--disable-logging")
+        options.add_argument("--log-level=3")
         self.host = url
         self.driver = webdriver.Chrome(options=options)
 
@@ -97,16 +98,17 @@ class ExtractDataRepository:
                     headers=headers,
                 ).json()
 
-                date_time = response["data"]["next_local_date_time"]
-                formatted_date_time = (
-                    date_time[8:10]
-                    + "-"
-                    + date_time[5:7]
-                    + "-"
-                    + date_time[:4]
-                    + " "
-                    + date_time[11:16]
-                )
+                date_time = response.get("data").get("next_local_date_time")
+                if date_time:
+                    date_time = (
+                        date_time[8:10]
+                        + "-"
+                        + date_time[5:7]
+                        + "-"
+                        + date_time[:4]
+                        + " "
+                        + date_time[11:16]
+                    )
                 html_description = response.get("data").get("description").get("raw")
                 if html_description:
                     description = re.sub(r"<.*?>", "", html_description)
@@ -115,7 +117,7 @@ class ExtractDataRepository:
                     description = None
                 data = {
                     "Nome do evento": response.get("data").get("name"),
-                    "Data do evento": formatted_date_time,
+                    "Data do evento": date_time,
                     "Local do evento": response.get("data")
                     .get("venue")
                     .get("locale")
