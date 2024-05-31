@@ -33,4 +33,4 @@ Este script Python acessa o site da sympla, coleta os dados dos eventos de entre
 
 4. **Utilização:**
 ```bash```
-- python schedule.py
+- python main.py
